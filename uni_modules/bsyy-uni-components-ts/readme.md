@@ -26,7 +26,13 @@
 
 ## 组件
 
-### Dialog
+### Overview 总览
+
+以下是 bsyy-uni-components-ts 提供的所有组件。
+
+-   Dialog 对话框
+
+### Dialog 对话框
 
 #### 基本用法
 
