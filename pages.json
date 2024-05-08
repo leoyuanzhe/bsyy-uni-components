@@ -1,11 +1,8 @@
 {
-    "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-        {
-            "path": "pages/index/index",
-            "style": {
-                "navigationBarTitleText": "bsyy-uni-components-ts"
-            }
-        }
+    "pages": [
+        { "path": "pages/index/index", "style": { "navigationBarTitleText": "bsyy-uni-components-ts" } },
+        { "path": "pages/dialog/dialog", "style": { "navigationBarTitleText": "bsyy-dialog" } },
+        { "path": "pages/popup/popup", "style": { "navigationBarTitleText": "bsyy-popup" } }
     ],
     "globalStyle": {
         "navigationBarTextStyle": "black",
