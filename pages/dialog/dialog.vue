@@ -1,12 +1,13 @@
 <script lang="ts" setup>
 import { ref } from "vue";
+
 const show = ref(true);
 </script>
 
 <template>
     <view class="dialog">
-        <button @click="show = true">打开Dialog</button>
-        <bsyy-dialog v-model="show">
+        <button @click="show = true">打开 Dialog</button>
+        <bsyy-dialog v-model:show="show">
             <view class="dialog">Hello Dialog!</view>
         </bsyy-dialog>
     </view>

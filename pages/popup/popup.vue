@@ -1,18 +1,22 @@
 <script lang="ts" setup>
-const goDialog = () => {
-    uni.navigateTo({ url: "/pages/dialog/dialog" });
-};
+import { ref } from "vue";
+
+const show = ref(true);
 </script>
 
 <template>
     <view class="popup">
-        <view class=""></view>
+        <button @click="show = true">打开 Popup</button>
+        <bsyy-popup v-model:show="show">
+            <view class="popup">Hello Popup!</view>
+        </bsyy-popup>
     </view>
 </template>
 
 <style lang="scss" scoped>
 .popup {
     .popup {
+        height: 200rpx;
         display: flex;
         justify-content: center;
         align-items: center;

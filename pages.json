@@ -2,6 +2,7 @@
     "pages": [
         { "path": "pages/index/index", "style": { "navigationBarTitleText": "bsyy-uni-components-ts" } },
         { "path": "pages/dialog/dialog", "style": { "navigationBarTitleText": "bsyy-dialog" } },
+        { "path": "pages/picker/picker", "style": { "navigationBarTitleText": "bsyy-picker" } },
         { "path": "pages/popup/popup", "style": { "navigationBarTitleText": "bsyy-popup" } }
     ],
     "globalStyle": {

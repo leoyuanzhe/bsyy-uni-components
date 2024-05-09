@@ -2,9 +2,9 @@
 <script lang="ts" setup>
 import { ref, watch } from "vue";
 
-type Props = { show?: boolean; zIndex?: number; closeOnClickOverlay?: boolean };
+type Props = { show?: boolean; position?: "top" | "bottom" | "right" | "left"; zIndex?: number; closeOnClickOverlay?: boolean };
 let animationData: UniApp.Animation | null = null;
-const props = withDefaults(defineProps<Props>(), { show: true, zIndex: 2000, closeOnClickOverlay: true });
+const props = withDefaults(defineProps<Props>(), { show: true, position: "bottom", zIndex: 2000, closeOnClickOverlay: true });
 const emits = defineEmits(["update:show", "close"]);
 const display = ref("none");
 const animation = ref(null);
@@ -44,27 +44,55 @@ function hideAnimation() {
 </script>
 
 <template>
-    <view class="bsyy-dialog" :animation="animation" :style="{ display, zIndex }" @click.stop="overlayClick()">
-        <view class="inner" @click.stop><slot></slot></view>
+    <view
+        class="bsyy-popup"
+        :animation="animation"
+        :style="{
+            display,
+            zIndex,
+            justifyContent: props.position == 'left' ? 'flex-start' : props.position == 'right' ? 'flex-end' : 'normal',
+            alignItems: props.position == 'top' ? 'flex-start' : props.position == 'bottom' ? 'flex-end' : 'normal',
+        }"
+        @click.stop="overlayClick()"
+    >
+        <view
+            class="inner"
+            :style="{
+                width: props.position == 'top' || props.position == 'bottom' ? '100%' : 'auto',
+                height: props.position == 'left' || props.position == 'right' ? '100%' : 'auto',
+                transform: props.show
+                    ? 'none'
+                    : props.position == 'left'
+                    ? 'translateX(-100%)'
+                    : props.position == 'right'
+                    ? 'translateX(100%)'
+                    : props.position == 'top'
+                    ? 'translateY(-100%)'
+                    : props.position == 'bottom'
+                    ? 'translateY(100%)'
+                    : 'none',
+            }"
+            @click.stop
+        >
+            <slot></slot>
+        </view>
     </view>
 </template>
 
 <style lang="scss" scoped>
-.bsyy-dialog {
+.bsyy-popup {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px) brightness(100%);
     -webkit-backdrop-filter: blur(5px) brightness(100%);
     .inner {
         max-width: 100vw;
         max-height: 100vh;
+        transition: transform 0.2s;
     }
 }
 </style>
