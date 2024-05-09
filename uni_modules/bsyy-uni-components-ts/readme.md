@@ -47,7 +47,7 @@
 -   Popup 弹出层
 -   ...正在开发中
 
-<iframe width="414" height="736" src="https://bsyyyz.github.io/YuanZhe/bsyy-uni-components-ts/#/" frameborder="0" allowfullscreen></iframe>
+[点我查看效果](https://bsyyyz.github.io/YuanZhe/bsyy-uni-components-ts "效果演示")
 
 ### Dialog 弹出框
 
