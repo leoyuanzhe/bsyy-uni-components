@@ -159,9 +159,9 @@
                     label: "北京市",
                     code: "00",
                     children: [
-                        { label: "东城区", code: "000", children: [] },
-                        { label: "西城区", code: "001", children: [] },
-                        { label: "崇文区", code: "002", children: [] },
+                        { label: "东城区", code: "000" },
+                        { label: "西城区", code: "001" },
+                        { label: "崇文区", code: "002" },
                     ],
                 },
             ],
@@ -174,25 +174,31 @@
                     label: "杭州市",
                     code: "10",
                     children: [
-                        {
-                            label: "上城区",
-                            code: "100",
-                            children: [],
-                        },
+                        { label: "上城区", code: "100" },
+                        { label: "下城区", code: "101" },
+                    ],
+                },
+                {
+                    label: "宁波市",
+                    code: "11",
+                    children: [
+                        { label: "海曙区", code: "110" },
+                        { label: "江东区", code: "111" },
                     ],
                 },
             ],
         },
     ];
-    const modelValue3 = ref([0, 0, 0]);
-    const columns3: { label: string; value: string }[][] = reactive([[], [], []]);
-    columns3[0] = citys.map((v) => ({ label: v.label, value: v.code }));
-    const countColumns3 = () => {
-        modelValue3.value[2] = modelValue3.value[1] = 0;
-        columns3[1] = citys[modelValue3.value[0]].children.map((v) => ({ label: v.label, value: v.code }));
-        columns3[2] = citys[modelValue3.value[0]].children[modelValue3.value[1]].children.map((v) => ({ label: v.label, value: v.code }));
+    const modelValue = ref([0, 0, 0]);
+    const columns: { label: string; value: string }[][] = reactive([[], [], []]);
+    columns[0] = citys.map((v) => ({ label: v.label, value: v.code }));
+    const countColumns = () => {
+        if (!citys[modelValue.value[0]].children[modelValue.value[1]]) modelValue.value[1] = 0;
+        if (!citys[modelValue.value[0]].children[modelValue.value[1]].children[modelValue.value[2]]) modelValue.value[2] = 0;
+        columns[1] = citys[modelValue.value[0]].children.map((v) => ({ label: v.label, value: v.code }));
+        columns[2] = citys[modelValue.value[0]].children[modelValue.value[1]].children.map((v) => ({ label: v.label, value: v.code }));
     };
-    countColumns3();
+    countColumns();
 </script>
 
 <template>
@@ -207,7 +213,7 @@
 | 属性名                | 说明                 | 类型                                                   | 默认 |
 | --------------------- | -------------------- | ------------------------------------------------------ | ---- |
 | model-value / v-model | 当前选中项对应的下标 | number[]                                               | []   |
-| columns               | 弹出位置             | { label: string; value: string\| number \| boolean }[] | []   |
+| columns               | 每一列显示的数据     | { label: string; value: string\| number \| boolean }[] | []   |
 
 ##### Events
 
