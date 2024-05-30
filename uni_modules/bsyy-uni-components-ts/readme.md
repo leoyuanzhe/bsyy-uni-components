@@ -64,19 +64,6 @@
         <view class="dialog">Hello Dialog!</view>
     </bsyy-dialog>
 </template>
-
-<style>
-    .dialog {
-        width: 200rpx;
-        height: 200rpx;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #fff;
-        border-radius: 10rpx;
-        box-shadow: 0 0 3rpx 1rpx royalblue;
-    }
-</style>
 ```
 
 #### API
@@ -97,7 +84,7 @@
 
 ##### Events
 
-| 事件名 | 说明              | Type       |
+| 事件名 | 说明              | 类型       |
 | ------ | ----------------- | ---------- |
 | close  | Dialog 关闭的回调 | () => void |
 
@@ -189,20 +176,66 @@
             ],
         },
     ];
+const citys = [
+    {
+        label: "北京",
+        code: "0",
+        children: [
+            {
+                label: "北京市",
+                code: "00",
+                children: [
+                    { label: "东城区", code: "000" },
+                    { label: "西城区", code: "001" },
+                    { label: "崇文区", code: "002" },
+                ],
+            },
+        ],
+    },
+    {
+        label: "浙江省",
+        code: "1",
+        children: [
+            {
+                label: "杭州市",
+                code: "10",
+                children: [
+                    { label: "上城区", code: "100" },
+                    { label: "下城区", code: "101" },
+                ],
+            },
+            {
+                label: "宁波市",
+                code: "11",
+                children: [
+                    { label: "海曙区", code: "110" },
+                    { label: "江东区", code: "111" },
+                ],
+            },
+        ],
+    },
+];
     const modelValue = ref([0, 0, 0]);
     const columns: { label: string; value: string }[][] = reactive([[], [], []]);
     columns[0] = citys.map((v) => ({ label: v.label, value: v.code }));
-    const countColumns = () => {
-        if (!citys[modelValue.value[0]].children[modelValue.value[1]]) modelValue.value[1] = 0;
-        if (!citys[modelValue.value[0]].children[modelValue.value[1]].children[modelValue.value[2]]) modelValue.value[2] = 0;
-        columns[1] = citys[modelValue.value[0]].children.map((v) => ({ label: v.label, value: v.code }));
-        columns[2] = citys[modelValue.value[0]].children[modelValue.value[1]].children.map((v) => ({ label: v.label, value: v.code }));
+    const change = (e: { selectedValues: string[]; selectedOptions: { label: string; value: string }[][]; selectedIndexes: number[]; columnIndex: number }) => {
+        if (e.columnIndex == 0) {
+            modelValue.value[1] = 0;
+            modelValue.value[2] = 0;
+        } else if (e.columnIndex == 1) {
+            modelValue.value[2] = 0;
+        }
+        countColumns();
     };
     countColumns();
+    function countColumns() {
+        columns[1] = citys[modelValue.value[0]].children.map((v) => ({ label: v.label, value: v.code }));
+        columns[2] = citys[modelValue.value[0]].children[modelValue.value[1]].children.map((v) => ({ label: v.label, value: v.code }));
+    }
 </script>
 
 <template>
-    <bsyy-picker v-model="modelValue" :columns="columns" @change="countColumns($event)" />
+    <bsyy-picker v-model="modelValue" :columns="columns" @change="change($event)" />
 </template>
 ```
 
@@ -210,16 +243,16 @@
 
 ##### Attributes
 
-| 属性名                | 说明                 | 类型                                                   | 默认 |
-| --------------------- | -------------------- | ------------------------------------------------------ | ---- |
-| model-value / v-model | 当前选中项对应的下标 | number[]                                               | []   |
-| columns               | 每一列显示的数据     | { label: string; value: string\| number \| boolean }[] | []   |
+| 属性名                | 说明                 | 类型                               | 默认 |
+| --------------------- | -------------------- | ---------------------------------- | ---- |
+| model-value / v-model | 当前选中项对应的下标 | number[]                           | []   |
+| columns               | 每一列显示的数据     | { label: string; value: any }[]\[] | []   |
 
 ##### Events
 
-| 事件名 | 说明                 | Type                      |
-| ------ | -------------------- | ------------------------- |
-| change | 选中的选项改变时触发 | (value: number[]) => void |
+| 事件名 | 说明                 | 类型                                                         |
+| ------ | -------------------- | ------------------------------------------------------------ |
+| change | 选中的选项改变时触发 | ($event: { selectedValues: any[]; selectedOptions: { label: string; value: any }[]; selectedIndexes: number[]; columnIndex: number }) => void |
 
 ### Popup 弹出层
 
@@ -236,18 +269,6 @@
         <view class="popup">Hello Popup!</view>
     </bsyy-popup>
 </template>
-
-<style lang="scss" scoped>
-    .popup {
-        height: 200rpx;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #fff;
-        border-radius: 10rpx;
-        box-shadow: 0 0 3rpx 1rpx royalblue;
-    }
-</style>
 ```
 
 #### API
@@ -269,7 +290,7 @@
 
 ##### Events
 
-| 事件名 | 说明             | Type       |
+| 事件名 | 说明             | 类型       |
 | ------ | ---------------- | ---------- |
 | close  | Popup 关闭的回调 | () => void |
 

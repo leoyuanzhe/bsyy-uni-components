@@ -1,13 +1,22 @@
 <!-- Created by YuanZhe(https://bsyyyz.github.io/YuanZhe) -->
 <script lang="ts" setup>
-type Props = { modelValue?: number[]; columns?: { label: string; value: string | number | boolean }[][] };
+import { watch } from "vue";
+
+type Props = { modelValue?: number[]; columns?: { label: string; value: any }[][] };
 const props = withDefaults(defineProps<Props>(), { modelValue: () => [], columns: () => [] });
 const emits = defineEmits(["update:model-value", "change"]);
+watch(
+    () => props.modelValue,
+    (newValue, oldValue) => {
+        let columnIndex = newValue.findIndex((v, i) => v != oldValue[i]);
+        emits("change", { selectedValues: newValue.map((v, i) => props.columns[i][v].value), selectedOptions: newValue.map((v, i) => props.columns[i][v]), selectedIndexes: newValue, columnIndex });
+    }
+);
 </script>
 
 <template>
     <view class="bsyy-picker">
-        <picker-view :value="props.modelValue" @change="emits('update:model-value', $event.detail.value), emits('change', $event.detail.value)">
+        <picker-view :value="props.modelValue" @change="emits('update:model-value', $event.detail.value)">
             <picker-view-column v-for="(v, i) in props.columns" :key="i">
                 <text v-for="v2 in v" :key="v2.value">{{ v2.label }}</text>
             </picker-view-column>
