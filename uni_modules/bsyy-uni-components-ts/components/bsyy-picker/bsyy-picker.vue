@@ -29,16 +29,12 @@ watch(
     width: 100%;
     height: 200px;
     background-color: var(--bsyy-picker-background-color);
-    .title {
-        height: 80rpx;
-        background-color: var(--bsyy-picker-title-background-color);
-    }
     picker-view {
         height: 100%;
         .uni-picker-view-mask {
             background-image: var(--bsyy-picker-mask) !important;
         }
-        .uni-picker-view-content {
+        picker-view-column {
             display: flex;
             flex-direction: column;
             text {
