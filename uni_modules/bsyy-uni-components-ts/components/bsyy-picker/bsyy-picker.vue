@@ -9,7 +9,7 @@ watch(
     () => props.modelValue,
     (newValue, oldValue) => {
         let columnIndex = newValue.findIndex((v, i) => v != oldValue[i]);
-        emits("change", { selectedValues: newValue.map((v, i) => props.columns[i][v].value), selectedOptions: newValue.map((v, i) => props.columns[i][v]), selectedIndexes: newValue, columnIndex });
+        emits("change", { selectedValues: newValue.map((v, i) => props.columns[i][v]?.value), selectedOptions: newValue.map((v, i) => props.columns[i][v]), selectedIndexes: newValue, columnIndex });
     }
 );
 </script>
