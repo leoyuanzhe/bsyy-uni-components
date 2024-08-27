@@ -10,7 +10,9 @@ const display = ref("none");
 const animation = ref(null);
 watch(
     () => props.show,
-    (value) => (value ? showAnimation() : hideAnimation())
+    (value) => {
+        value ? showAnimation() : hideAnimation();
+    }
 );
 init();
 function init() {
@@ -29,8 +31,10 @@ function showAnimation() {
     // #endif
     display.value = "flex";
     setTimeout(() => {
-        animationData.opacity(1).step();
-        animation.value = animationData.export();
+        if (props.show) {
+            animationData.opacity(1).step();
+            animation.value = animationData.export();
+        }
     }, 17);
 }
 function hideAnimation() {
@@ -39,7 +43,9 @@ function hideAnimation() {
     // #endif
     animationData.opacity(0).step();
     animation.value = animationData.export();
-    setTimeout(() => (display.value = "none"), 200);
+    setTimeout(() => {
+        if (!props.show) display.value = "none";
+    }, 200);
 }
 </script>
 
