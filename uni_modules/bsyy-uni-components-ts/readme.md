@@ -176,45 +176,6 @@
             ],
         },
     ];
-const citys = [
-    {
-        label: "北京",
-        code: "0",
-        children: [
-            {
-                label: "北京市",
-                code: "00",
-                children: [
-                    { label: "东城区", code: "000" },
-                    { label: "西城区", code: "001" },
-                    { label: "崇文区", code: "002" },
-                ],
-            },
-        ],
-    },
-    {
-        label: "浙江省",
-        code: "1",
-        children: [
-            {
-                label: "杭州市",
-                code: "10",
-                children: [
-                    { label: "上城区", code: "100" },
-                    { label: "下城区", code: "101" },
-                ],
-            },
-            {
-                label: "宁波市",
-                code: "11",
-                children: [
-                    { label: "海曙区", code: "110" },
-                    { label: "江东区", code: "111" },
-                ],
-            },
-        ],
-    },
-];
     const modelValue = ref([0, 0, 0]);
     const columns: { label: string; value: string }[][] = reactive([[], [], []]);
     columns[0] = citys.map((v) => ({ label: v.label, value: v.code }));
