@@ -11,7 +11,7 @@
 -   App.vue：
 
 ```scss
-@import "@/uni_modules/bsyy-uni-components-ts/styles/style.scss";
+@import "@/uni_modules/bsyy-uni-components/styles/style.scss";
 ```
 
 #### 注册组件
@@ -24,7 +24,7 @@
 {
     "easycom": {
         "custom": {
-            "^bsyy-([^-].*)": "bsyy-uni-components-ts/components/bsyy-$1/bsyy-$1.vue"
+            "^bsyy-([^-].*)": "bsyy-uni-components/components/bsyy-$1/bsyy-$1.vue"
         }
     }
 }
@@ -40,14 +40,14 @@
 
 ### Overview 总览
 
-以下是 bsyy-uni-components-ts 提供的所有组件。
+以下是 bsyy-uni-components 提供的所有组件。
 
 -   Dialog 弹出框
 -   Picker 选择器
 -   Popup 弹出层
 -   ...正在开发中
 
-[点我查看效果](https://bsyyyz.github.io/YuanZhe/bsyy-uni-components-ts "效果演示")
+[点我查看效果](https://leoyuanzhe.github.io/YuanZhe/bsyy-uni-components "效果演示")
 
 ### Dialog 弹出框
 

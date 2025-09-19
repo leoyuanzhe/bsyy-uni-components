@@ -1,13 +1,13 @@
 {
     "pages": [
-        { "path": "pages/index/index", "style": { "navigationBarTitleText": "bsyy-uni-components-ts" } },
+        { "path": "pages/index/index", "style": { "navigationBarTitleText": "bsyy-uni-components" } },
         { "path": "pages/dialog/dialog", "style": { "navigationBarTitleText": "bsyy-dialog" } },
         { "path": "pages/picker/picker", "style": { "navigationBarTitleText": "bsyy-picker" } },
         { "path": "pages/popup/popup", "style": { "navigationBarTitleText": "bsyy-popup" } }
     ],
     "globalStyle": {
         "navigationBarTextStyle": "black",
-        "navigationBarTitleText": "bsyy-uni-components-ts",
+        "navigationBarTitleText": "bsyy-uni-components",
         "navigationBarBackgroundColor": "#F8F8F8",
         "backgroundColor": "#F8F8F8"
     },
@@ -15,7 +15,7 @@
     "easycom": {
         "custom": {
             "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue",
-            "^bsyy-([^-].*)": "bsyy-uni-components-ts/components/bsyy-$1/bsyy-$1.vue"
+            "^bsyy-([^-].*)": "bsyy-uni-components/components/bsyy-$1/bsyy-$1.vue"
         }
     }
 }
